@@ -8,15 +8,16 @@ export default function Navbar() {
     <header className="fixed top-0 left-0 w-full z-120 bg-[#181A1C] px-5 py-5 md:px-20 md:py-6 flex items-center justify-between">
       {/* Kiri: Logo & Navigasi */}
       <div className="flex items-center">
-        <Link to="/">
+        <Link to="/home">
           <img src="/assets/logo-icon.png" alt="Chill" className="w-5 h-4 md:hidden block" />
           <img src="/assets/logo.png" alt="Chill Logo" className="hidden md:block w-[105px] h-auto" />
         </Link>
         <nav className="ml-3 md:ml-20">
           <ul className="flex items-center gap-3 md:gap-20 list-none">
-            <li><Link to="/" className="text-white text-[10px] md:text-lg font-bold">Series</Link></li>
-            <li><Link to="/" className="text-[#9d9ea1] hover:text-white text-[10px] md:text-lg font-medium">Film</Link></li>
-            <li><Link to="/" className="text-[#9d9ea1] hover:text-white text-[10px] md:text-lg font-medium">Daftar Saya</Link></li>
+            {/* Ubah to="/" menjadi to="/home" */}
+            <li><Link to="/home" className="text-white text-[10px] md:text-lg font-bold">Series</Link></li>
+            <li><Link to="/home" className="text-[#9d9ea1] hover:text-white text-[10px] md:text-lg font-medium">Film</Link></li>
+            <li><Link to="/home" className="text-[#9d9ea1] hover:text-white text-[10px] md:text-lg font-medium">Daftar Saya</Link></li>
           </ul>
         </nav>
       </div>

@@ -21,7 +21,7 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Berhasil login -> arahkan ke Beranda / Homepage
-    navigate("/");
+    navigate("/home");
   };
 
   return (
