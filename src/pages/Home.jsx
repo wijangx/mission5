@@ -17,7 +17,7 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative w-full min-h-[420px] md:min-h-[587px] md:h-[587px] mt-[67px] md:mt-[94px] flex items-end px-5 pb-10 md:px-20 md:pb-20">
+      <section className="relative w-full aspect-[16/9] md:aspect-auto md:h-[587px] mt-[67px] md:mt-[94px] flex items-end px-5 pb-5 md:px-20 md:pb-20">
         <div className="absolute inset-0 z-0 overflow-hidden">
           <img
             src="/assets/hero-bg.png"
