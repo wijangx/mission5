@@ -35,8 +35,11 @@ export default function MovieSection({
         */}
         <div
           ref={scrollRef}
-          className="flex gap-4 md:gap-7 overflow-x-auto overflow-y-hidden scrollbar-none py-36 -my-36 px-6 -mx-6 overscroll-x-contain pointer-events-none"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+  className="flex gap-4 md:gap-7 overflow-x-auto overflow-y-hidden scrollbar-none py-36 -my-36 px-6 -mx-6 overscroll-x-contain touch-pan-x"
+  style={{ 
+    scrollbarWidth: "none", 
+    msOverflowStyle: "none",
+    WebkitOverflowScrolling: "touch" }}
         >
           {movies.map((movie, index) => (
             <div key={`${movie.id}-${index}`} className="pointer-events-auto shrink-0">
