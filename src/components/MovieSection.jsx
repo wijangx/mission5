@@ -15,8 +15,10 @@ export default function MovieSection({
   };
 
   return (
-    <section className="px-5 md:px-20 py-4 md:py-6 w-full relative z-10 transition-[z-index] has-[.group-active-hover]:z-50 hover:z-50 focus-within:z-50">
-      <h2 className="text-xl md:text-3xl font-bold mb-3 md:mb-4 text-white">{title}</h2>
+    <section className="px-5 md:px-20 py-3 w-full relative z-10">
+      <h2 className="text-xl md:text-3xl font-bold mb-3 md:mb-4 text-white">
+        {title}
+      </h2>
 
       <div className="relative w-full">
         {/* Tombol Panah Kiri */}
@@ -28,26 +30,21 @@ export default function MovieSection({
           <img src="/assets/arrow-left.png" alt="Prev" className="w-6 h-6" />
         </button>
 
-        {/* 
-          Container Slider:
-          - py-36 -my-36 (144px): memberi ruang bebas vertikal pas untuk pop-up 445px tanpa terpotong
-          - pointer-events-none: memastikan ruang padding kosong transparan TIDAK menutupi section tetangga
-        */}
+        {/* Container Slider Bersih tanpa Padding Hack */}
         <div
           ref={scrollRef}
-  className="flex gap-4 md:gap-7 overflow-x-auto overflow-y-hidden scrollbar-none py-36 -my-36 px-6 -mx-6 overscroll-x-contain touch-pan-x"
-  style={{ 
-    scrollbarWidth: "none", 
-    msOverflowStyle: "none",
-    WebkitOverflowScrolling: "touch" }}
+          className="flex gap-4 md:gap-7 overflow-x-auto overflow-y-hidden scrollbar-none py-2 my-0 px-2 -mx-2 touch-pan-x"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            WebkitOverflowScrolling: "touch",
+          }}
         >
           {movies.map((movie, index) => (
-            <div key={`${movie.id}-${index}`} className="pointer-events-auto shrink-0">
+            <div key={`${movie.id}-${index}`} className="shrink-0">
               <MovieCard
                 movie={movie}
                 isLandscape={isLandscape}
-                isFirst={index === 0}
-                isLast={index === movies.length - 1}
               />
             </div>
           ))}
