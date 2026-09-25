@@ -5,7 +5,6 @@ export default function MovieCard({ movie, isLandscape = false }) {
   const [isRendered, setIsRendered] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [coords, setCoords] = useState({ top: 0, left: 0 });
-  const [transformClass, setTransformClass] = useState("-translate-x-1/2");
 
   const cardRef = useRef(null);
   const hoverTimeout = useRef(null);
@@ -30,33 +29,24 @@ export default function MovieCard({ movie, isLandscape = false }) {
       if (cardRef.current) {
         const rect = cardRef.current.getBoundingClientRect();
         const popupWidth = 390;
-        const popupHeight = isLandscape ? 445 : 450;
-        const navbarHeight = 80;
-        
-        // Sesuaikan paddingBoundary jika tombol panah kamu melebar dari kontainer (misal: 80px)
-        const paddingBoundary = 80; 
+        const paddingBoundary = 80; // Batas jarak dari pinggir layar (sejajar anak panah)
 
-        // 1. Hitung Posisi Vertical
-        let calculatedTop = rect.top + rect.height / 2;
-        const minTop = navbarHeight + popupHeight / 2 + 10;
-        if (calculatedTop < minTop) {
-          calculatedTop = minTop;
-        }
+        // 1. SUMBU Y: MURNI TITIK TENGAH POSTER
+        // Menghapus logika minTop agar popup tidak pernah melompat/bergeser ke bawah
+        const calculatedTop = rect.top + rect.height / 2;
 
-        // 2. Hitung Posisi Horizontal (Strict Boundary)
+        // 2. SUMBU X: MURNI TITIK TENGAH POSTER (dengan proteksi batas layar kanan-kiri)
+        const cardCenterX = rect.left + rect.width / 2;
         const popupHalfWidth = popupWidth / 2;
+        
         const minLeftAllowed = paddingBoundary + popupHalfWidth;
         const maxLeftAllowed = window.innerWidth - paddingBoundary - popupHalfWidth;
 
-        const cardCenterX = rect.left + rect.width / 2;
-
-        // Kunci koordinat X agar tepi popup tidak pernah melewati paddingBoundary
-        let calculatedLeft = Math.max(
+        const calculatedLeft = Math.max(
           minLeftAllowed,
           Math.min(cardCenterX, maxLeftAllowed)
         );
 
-        setTransformClass("-translate-x-1/2");
         setCoords({
           top: calculatedTop,
           left: calculatedLeft,
@@ -84,10 +74,12 @@ export default function MovieCard({ movie, isLandscape = false }) {
 
     if (isRendered) {
       window.addEventListener("scroll", handleScrollOrResize, { capture: true, passive: true });
+      window.addEventListener("resize", handleScrollOrResize, { passive: true });
     }
 
     return () => {
       window.removeEventListener("scroll", handleScrollOrResize, { capture: true });
+      window.removeEventListener("resize", handleScrollOrResize);
     };
   }, [isRendered]);
 
@@ -131,7 +123,7 @@ export default function MovieCard({ movie, isLandscape = false }) {
         />
         {isLandscape && (
           <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/90 to-transparent flex justify-between items-end pointer-events-none">
-            <span className="text-sm md:text-lg font-bold text-white truncate max-w-[70%]">
+            <span className="text-sm md:text-lg font-bold text-[#FFFFFF] truncate max-w-[70%]">
               {movie.title}
             </span>
             <div className="flex items-center gap-1">
@@ -155,7 +147,7 @@ export default function MovieCard({ movie, isLandscape = false }) {
               left: `${coords.left}px`,
               borderRadius: "20px",
             }}
-            className={`hidden md:flex fixed ${transformClass} -translate-y-1/2 w-[390px] ${
+            className={`hidden md:flex fixed -translate-x-1/2 -translate-y-1/2 w-[390px] ${
               isLandscape ? "h-[445px]" : "h-[450px]"
             } bg-[#181A1C] rounded-[20px] overflow-hidden shadow-[0_24px_50px_rgba(0,0,0,0.95)] border border-[#282A2E] flex-col justify-between pointer-events-none transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] z-[40] ${
               isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"

@@ -6,7 +6,7 @@ export default function Footer() {
   const [openBantuan, setOpenBantuan] = useState(false);
 
   return (
-    <footer className="bg-[#181A1C] border-t border-[#282A2E] px-6 py-8 md:px-20 md:py-16 mt-20 text-white w-full">
+    <footer className="bg-[#181A1C] border-t border-[#282A2E] px-6 py-8 md:px-20 md:py-16 mt-10 text-white w-full">
       {/* DESKTOP FOOTER */}
       <div className="hidden md:flex w-full justify-between items-start gap-12">
         {/* Kolom Brand Kiri */}
@@ -116,10 +116,10 @@ export default function Footer() {
           </p>
         </div>
 
-        <div className="flex flex-col text-sm border-t border-[#282A2E]">
+        <div className="flex flex-col text-sm ">
           <button
             onClick={() => setOpenGenre(!openGenre)}
-            className="flex items-center justify-between py-3.5 border-b border-[#282A2E] text-left text-white font-medium"
+            className="flex items-center justify-between py-3.5  text-left text-white font-medium"
           >
             <span>Genre</span>
             <span
@@ -129,7 +129,7 @@ export default function Footer() {
             </span>
           </button>
           {openGenre && (
-            <div className="flex flex-col gap-2 py-2.5 pl-3 text-xs text-[#9D9EA1] border-b border-[#282A2E]">
+            <div className="flex flex-col gap-2 py-2.5 pl-3 text-xs text-[#9D9EA1]-[#282A2E]">
               <a href="#" className="hover:text-white">
                 Aksi
               </a>
@@ -147,7 +147,7 @@ export default function Footer() {
 
           <button
             onClick={() => setOpenBantuan(!openBantuan)}
-            className="flex items-center justify-between py-3.5 border-b border-[#282A2E] text-left text-white font-medium"
+            className="flex items-center justify-between py-3.5 text-left text-white font-medium"
           >
             <span>Bantuan</span>
             <span
@@ -157,7 +157,7 @@ export default function Footer() {
             </span>
           </button>
           {openBantuan && (
-            <div className="flex flex-col gap-2 py-2.5 pl-3 text-xs text-[#9D9EA1] border-b border-[#282A2E]">
+            <div className="flex flex-col gap-2 py-2.5 pl-3 text-xs text-[#9D9EA1]">
               <a href="#" className="hover:text-white">
                 FAQ
               </a>
